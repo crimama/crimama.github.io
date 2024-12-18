@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>숫자 야구 게임</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>숫자 야구 게임</h1>
+    <div>
+        <label for="guess">Guess:</label>
+        <input type="text" id="guess" maxlength="3" placeholder="123">
+    </div>
+    <div>
+        <label for="strike">Strike:</label>
+        <input type="number" id="strike" min="0" max="3" placeholder="0">
+        <label for="ball">Ball:</label>
+        <input type="number" id="ball" min="0" max="3" placeholder="0">
+    </div>
+    <button onclick="submitGuess()">Submit</button>
+    <button onclick="resetCandidates()">Reset</button>
+    <div id="output"></div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
