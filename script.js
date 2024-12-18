@@ -1,11 +1,12 @@
 let candidates = generateCandidates();
+let history = [];
 
 function generateCandidates() {
-    // 모든 3자리 숫자 조합 생성
+    // 모든 4자리 숫자 조합 생성
     const digits = '0123456789';
     const permutations = [];
     function permute(prefix, remaining) {
-        if (prefix.length === 3) {
+        if (prefix.length === 4) {
             permutations.push(prefix);
             return;
         }
@@ -20,7 +21,7 @@ function generateCandidates() {
 function checkStrikeBall(guess, answer) {
     // strike와 ball 계산
     let strike = 0, ball = 0;
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 4; i++) {
         if (guess[i] === answer[i]) {
             strike++;
         } else if (answer.includes(guess[i])) {
@@ -42,11 +43,16 @@ function submitGuess() {
     const strike = parseInt(document.getElementById('strike').value, 10);
     const ball = parseInt(document.getElementById('ball').value, 10);
 
-    if (guess.length !== 3 || isNaN(strike) || isNaN(ball)) {
+    if (guess.length !== 4 || isNaN(strike) || isNaN(ball)) {
         alert("입력을 확인해주세요.");
         return;
     }
 
+    // 히스토리 업데이트
+    history.push({ guess, strike, ball });
+    updateHistory();
+
+    // 후보 필터링
     filterCandidates(guess, [strike, ball]);
 
     const output = document.getElementById('output');
@@ -62,7 +68,19 @@ function submitGuess() {
     }
 }
 
+function updateHistory() {
+    const historyList = document.getElementById('history-list');
+    historyList.innerHTML = ''; // 이전 기록 초기화
+    history.forEach(entry => {
+        const li = document.createElement('li');
+        li.innerText = `Guess: ${entry.guess}, Strike: ${entry.strike}, Ball: ${entry.ball}`;
+        historyList.appendChild(li);
+    });
+}
+
 function resetCandidates() {
     candidates = generateCandidates();
+    history = [];
     document.getElementById('output').innerText = "후보가 초기화되었습니다.";
+    updateHistory();
 }

@@ -8,6 +8,7 @@ h1 {
 }
 input {
     margin: 5px;
+    padding: 5px;
 }
 button {
     margin: 10px;
@@ -20,9 +21,19 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-#output {
+#output, #history {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     background-color: #fff;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+li {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #e9ecef;
+    border: 1px solid #ddd;
 }
